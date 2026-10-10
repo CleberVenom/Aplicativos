@@ -1,0 +1,32 @@
+{
+  "name": "conversas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Central de atendimento multiatendente integrada ao WhatsApp (API oficial WhatsApp Cloud).",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "node --disable-warning=ExperimentalWarning --watch-path=server server/index.ts --dev",
+    "build": "vite build",
+    "start": "node --disable-warning=ExperimentalWarning server/index.ts",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json && tsc -p web/tsconfig.json",
+    "simulate": "node --env-file-if-exists=.env scripts/simulate.ts"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}
