@@ -118,9 +118,11 @@ export function AdjustScreen({ id, proposalKey }: { id: string; proposalKey: Pro
           </Section>
           <Section title="Manter um item como está">
             <ChipGroup>
-              {FURNITURE_BY_ROOM[project.answers.roomType ?? 'outro'].map((item) => (
-                <Chip key={item} label={item} selected={keepItem === item} onPress={() => setKeepItem(item)} />
-              ))}
+              {FURNITURE_BY_ROOM[project.answers.roomType ?? 'outro']
+                .filter((item) => project.answers.furniture[item] !== 'nao_tenho')
+                .map((item) => (
+                  <Chip key={item} label={item} selected={keepItem === item} onPress={() => setKeepItem(item)} />
+                ))}
             </ChipGroup>
             <Button title="Manter item" size="sm" disabled={!keepItem || busy} onPress={() => keepItem && applyDemo({ type: 'keep', item: keepItem })} style={{ alignSelf: 'flex-start' }} />
           </Section>

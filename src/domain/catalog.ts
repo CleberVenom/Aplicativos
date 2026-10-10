@@ -142,8 +142,10 @@ export const BUDGET_IDS = BUDGETS.map((b) => b.id) as [BudgetId, ...BudgetId[]];
 
 export const FURNITURE_DECISIONS = [
   { id: 'manter', label: 'Manter' },
-  { id: 'reposicionar', label: 'Reposicionar' },
-  { id: 'substituir', label: 'Pode trocar' },
+  { id: 'reposicionar', label: 'Mover' },
+  { id: 'substituir', label: 'Trocar' },
+  /** The item does not exist in the room today. */
+  { id: 'nao_tenho', label: 'Não tenho' },
 ] as const;
 
 export type FurnitureDecisionId = (typeof FURNITURE_DECISIONS)[number]['id'];

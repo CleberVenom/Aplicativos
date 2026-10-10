@@ -11,7 +11,7 @@ export const STEP_META: Record<StepId, { title: string; subtitle: string; option
   budget: { title: 'Quanto pretende investir?', subtitle: 'Usamos isso para calibrar as propostas.', optional: false },
   furniture: {
     title: 'O que fica e o que pode mudar?',
-    subtitle: 'Marque só o que importa. Itens sem marcação ficam a critério das propostas.',
+    subtitle: 'Marque só o que importa, inclusive o que você não tem. Itens sem marcação ficam a critério das propostas.',
     optional: true,
   },
   preferences: { title: 'Suas preferências', subtitle: 'Cores, materiais e necessidades do dia a dia.', optional: true },

@@ -71,6 +71,21 @@ describe('demo study', () => {
     for (const p of proposals) expect(p.changes.keep).toContain('Sofá');
   });
 
+  it('treats "Não tenho" items as absent today: never kept, shown as new', () => {
+    const study = buildDemoStudy(sampleAnswers({ furniture: { Cortinas: 'nao_tenho', Plantas: 'nao_tenho', Sofá: 'manter' }, budget: 'economico' }));
+    for (const p of study.proposals) {
+      expect(p.changes.keep).not.toContain('Cortinas');
+      expect(p.changes.replace).not.toContain('Cortinas');
+      expect(p.changes.add).toContain('Cortinas');
+      expect(new Set(p.changes.add).size).toBe(p.changes.add.length);
+      expect(p.userFit.join(' ')).toMatch(/ainda não tem: cortinas e plantas/);
+      const curtains = p.scene.items.filter((i) => i.kind === 'cortina');
+      expect(curtains.length).toBeGreaterThan(0);
+      expect(curtains.every((i) => i.status === 'novo')).toBe(true);
+      expect(p.scene.items.filter((i) => i.kind === 'sofa').every((i) => i.status === 'mantido')).toBe(true);
+    }
+  });
+
   it('keeps 3D items inside the room', () => {
     for (const { scene } of proposals) {
       for (const item of scene.items) {

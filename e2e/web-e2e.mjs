@@ -97,6 +97,11 @@ try {
     if (checked !== 'true') throw new Error(`budget answer lost after going back (aria-checked=${checked})`);
     await byId('step-next').click();
     await byId('step-furniture').waitFor();
+    // "Não tenho" marks an item that does not exist in the room today.
+    const noCurtains = page.getByRole('radio', { name: 'Cortinas: Não tenho' }).filter({ visible: true });
+    await noCurtains.click();
+    if ((await noCurtains.getAttribute('aria-checked')) !== 'true') throw new Error('"Não tenho" option did not select');
+    await snap('step-furniture-missing-item');
     await byId('step-next').click();
     await byId('step-preferences').waitFor();
     await byId('fav-verde_salvia').click();
@@ -109,6 +114,8 @@ try {
     await byId('step-next').click();
     await byId('step-review').waitFor();
     await byId('review-summary').waitFor();
+    const summary = await byId('review-summary').innerText();
+    if (!/Não tenho\s*Cortinas/.test(summary)) throw new Error('review summary does not list the missing item');
     await snap('review');
   });
 
@@ -151,6 +158,7 @@ try {
   await step('proposal detail + choose + 3D invite', async () => {
     await byId('open-proposal-B').click();
     await byId('proposal-screen').waitFor();
+    if (MODE === 'demo') await page.getByText('Considera que você ainda não tem: cortinas.', { exact: false }).first().waitFor();
     await snap('proposal-B');
     await page.mouse.wheel(0, 1400);
     await snap('proposal-B-scrolled');

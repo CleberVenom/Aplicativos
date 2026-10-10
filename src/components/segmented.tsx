@@ -39,13 +39,14 @@ export function Segmented<T extends string>({
             style={({ pressed }) => ({
               flex: 1,
               minHeight: 36,
-              paddingHorizontal: spacing.sm,
+              paddingHorizontal: spacing.xs,
+              paddingVertical: spacing.xxs,
               borderRadius: radius.full,
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: selected ? colors.primary : pressed ? colors.surfaceMuted : 'transparent',
             })}>
-            <AppText variant="caption" style={{ color: selected ? colors.onPrimary : colors.textSecondary }} numberOfLines={1}>
+            <AppText variant="caption" align="center" style={{ color: selected ? colors.onPrimary : colors.textSecondary }} numberOfLines={2}>
               {option.label}
             </AppText>
           </Pressable>

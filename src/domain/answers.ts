@@ -99,8 +99,9 @@ export function describeAnswers(answers: Answers): { label: string; value: strin
   const byDecision = (decision: string) =>
     furniture.filter(([, d]) => d === decision).map(([item]) => item).join(', ');
   push('Manter', byDecision('manter'));
-  push('Reposicionar', byDecision('reposicionar'));
-  push('Pode trocar', byDecision('substituir'));
+  push('Mover', byDecision('reposicionar'));
+  push('Trocar', byDecision('substituir'));
+  push('Não tenho', byDecision('nao_tenho'));
   push('Observações sobre o que manter', answers.keepNotes);
 
   push('Cores preferidas', answers.favoriteColors.map(colorLabel).join(', '));

@@ -32,7 +32,9 @@ export function FurnitureStep() {
             variant="ghost"
             size="sm"
             style={{ alignSelf: 'flex-start', marginLeft: -spacing.md }}
-            onPress={() => update({ furniture: Object.fromEntries(items.map((i) => [i, 'manter' as const])) })}
+            onPress={() =>
+              update({ furniture: Object.fromEntries(items.map((i) => [i, answers.furniture[i] === 'nao_tenho' ? 'nao_tenho' : 'manter'] as const)) })
+            }
           />
         </Notice>
       ) : null}

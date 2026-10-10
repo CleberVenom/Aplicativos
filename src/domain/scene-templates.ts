@@ -1,4 +1,4 @@
-import type { RoomTypeId } from './catalog';
+import type { FurnitureDecisionId, RoomTypeId } from './catalog';
 import type { ItemStatus, SceneItem, SceneItemKind, SceneOpening, SceneSpec } from './scene';
 import { normalizeScene, SCENE_ITEM_KINDS } from './scene';
 
@@ -234,11 +234,17 @@ export type TemplateOptions = {
   floorColor?: string;
   dims?: { widthM?: number; lengthM?: number; heightM?: number };
   /** Furniture decisions keyed by catalog label (from the questionnaire). */
-  decisions?: Record<string, 'manter' | 'reposicionar' | 'substituir'>;
+  decisions?: Record<string, FurnitureDecisionId>;
 };
+
+/** Catalog items (by label) that the template shows for a room and variant. */
+export function templateRefs(roomType: RoomTypeId, variant: 'A' | 'B' | 'C'): string[] {
+  return T[roomType].items.filter((i) => i.ref && (!i.variants || i.variants.includes(variant))).map((i) => i.ref!);
+}
 
 function statusFor(item: TemplateItem, variant: 'A' | 'B' | 'C', decisions: TemplateOptions['decisions']): ItemStatus {
   const decision = item.ref ? decisions?.[item.ref] : undefined;
+  if (decision === 'nao_tenho') return 'novo';
   if (decision === 'manter') return 'mantido';
   if (decision === 'reposicionar') return 'reposicionado';
   const onlyInBold = item.variants && !item.variants.includes('A');

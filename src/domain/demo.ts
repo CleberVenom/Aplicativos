@@ -12,7 +12,7 @@ import {
   type StyleId,
 } from './catalog';
 import type { Direction, InvestmentLevel, PlanArea, ProposalContent } from './design';
-import { buildTemplateScene } from './scene-templates';
+import { buildTemplateScene, templateRefs } from './scene-templates';
 
 /**
  * Demo mode: builds three example proposals ON THE DEVICE, using only the
@@ -207,6 +207,7 @@ export function buildDemoStudy(answers: Answers): { directions: Direction[]; pro
   const keep = byDecision('manter');
   const reposition = byDecision('reposicionar');
   const replaceable = byDecision('substituir');
+  const missing = byDecision('nao_tenho');
 
   const goalsText = joinList(answers.goals.map((g) => labelOf(GOALS, g).toLowerCase())) || 'renovar o ambiente';
   const budgetText = answers.budget ? `orçamento ${labelOf(BUDGETS, answers.budget).toLowerCase()}` : 'orçamento ainda indefinido';
@@ -303,10 +304,11 @@ export function buildDemoStudy(answers: Answers): { directions: Direction[]; pro
           ? ['Tapete em proporção correta', 'Iluminação em camadas', 'Uma peça nova de destaque']
           : [STATEMENT_PIECE[roomType].replace(/^um[a]? /, ''), 'Arte de grande formato', 'Iluminação cênica'];
 
+    const addedMissing = missing.filter((item) => templateRefs(roomType, variant).includes(item));
     const changes = {
       keep: keep.length ? keep : variant === 'A' ? ['Móveis principais em bom estado'] : [],
       reposition,
-      add,
+      add: [...new Set([...addedMissing, ...add])],
       remove: ['Objetos que poluem visualmente'],
       replace: variant === 'A' ? [] : replaceable.length ? replaceable : ['Peças que destoam do conjunto'],
     };
@@ -319,6 +321,7 @@ export function buildDemoStudy(answers: Answers): { directions: Direction[]; pro
       answers.needs.length ? `Considera: ${joinList(answers.needs.map((n) => NEED_OPTIONS.find((o) => o.id === n)?.label.toLowerCase() ?? n))}.` : '',
       answers.limitations.length ? `Respeita: ${joinList(answers.limitations.map((l) => labelOf(LIMITATIONS, l).toLowerCase()))}.` : '',
       keep.length ? `Preserva ${joinList(keep.map((k) => k.toLowerCase()))}, como você pediu.` : '',
+      missing.length ? `Considera que você ainda não tem: ${joinList(missing.map((m) => m.toLowerCase()))}.` : '',
     ].filter(Boolean);
 
     const strategy =
