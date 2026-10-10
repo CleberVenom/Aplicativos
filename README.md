@@ -43,7 +43,7 @@ Feito com Expo SDK 57, React Native 0.86, TypeScript e Expo Router. As chamadas 
 Validado neste ambiente de desenvolvimento (Linux, sem celular e sem chaves reais):
 
 - TypeScript, ESLint e `expo-doctor` (21 de 21 verificações) sem problemas.
-- 133 testes unitários (Jest) passando: questionário adaptativo, gerador de demonstração, maquete 3D, validação de fotos, contraste de cores (WCAG AA), rotas do servidor, streaming, limite de requisições e os adaptadores Anthropic, Gemini, OpenAI e World Labs com respostas simuladas.
+- 136 testes unitários (Jest) passando: questionário adaptativo, gerador de demonstração, maquete 3D, validação de fotos, contraste de cores (WCAG AA), rotas do servidor, streaming, limite de requisições e os adaptadores Anthropic, Gemini, OpenAI e World Labs com respostas simuladas.
 - Teste ponta a ponta na web (Playwright, tela de celular 390×844) do fluxo inteiro, em dois modos: demonstração e IA com um servidor simulado local (imagens, ajustes, 3D imersivo). Zero erros no console.
 - Rotas reais do servidor + SDK oficial da Anthropic em streaming contra uma API simulada local, conferindo o formato exato da requisição enviada.
 - Com chaves inválidas, Anthropic, Gemini, OpenAI e World Labs responderam erro de autenticação, e o app exibiu a mensagem correta.
@@ -73,18 +73,22 @@ Se uma alteração de código não aparecer no app, reinicie com `npx expo start
 
 ## Ativar a IA
 
+> **Passo a passo sem termos técnicos** para conseguir cada chave, ativar a cobrança e cadastrá-la no app: [`docs/configurar-apis.md`](docs/configurar-apis.md).
+
+Para testar no computador:
+
 1. Copie o modelo de variáveis: `cp .env.example .env`
 2. Preencha no `.env`:
    - `ANTHROPIC_API_KEY` — **obrigatória** para análise, propostas e ajustes (Claude).
-   - `GEMINI_API_KEY` **ou** `OPENAI_API_KEY` — imagens das propostas. Sem nenhuma delas, as propostas aparecem sem imagem.
+   - `GEMINI_API_KEY` **ou** `OPENAI_API_KEY` — imagens das propostas. Sem nenhuma delas, as propostas aparecem sem imagem. O Nano Banana (Gemini) não tem uso gratuito: exige cobrança ativada na conta Google.
    - `WORLDLABS_API_KEY` — opcional, para o 3D imersivo.
-3. Reinicie o `npx expo start`. A tela inicial passa a mostrar "IA disponível", e as Configurações mostram o status de cada serviço.
+3. Reinicie o `npx expo start`. A tela inicial passa a mostrar "IA conectada", e as Configurações mostram o status de cada serviço.
 
-As chaves são criadas no painel de desenvolvedor de cada provedor. O `.env` está no `.gitignore` e só é lido pelo servidor. Todas as variáveis estão documentadas em [`.env.example`](.env.example).
+Como criar cada chave: veja o [guia de configuração](docs/configurar-apis.md). O `.env` está no `.gitignore` e só é lido pelo servidor. Todas as variáveis estão documentadas em [`.env.example`](.env.example).
 
 **Como o celular chega ao servidor:** o `npx expo start` serve o app e as rotas `/api`. No Expo Go, o Expo Router aponta as chamadas automaticamente para esse servidor de desenvolvimento, e as chaves ficam apenas no computador. Em produção, veja [Publicação nas lojas](#publicação-nas-lojas).
 
-**Custos:** cada geração completa faz 4 chamadas ao Claude (1 análise + 3 propostas) e 3 gerações de imagem. Cada ajuste faz 1 chamada ao Claude e 1 imagem. O 3D imersivo é cobrado à parte pela World Labs. Os valores dependem do plano de cada provedor.
+**Custos:** cada geração completa faz 4 chamadas ao Claude (1 análise + 3 propostas) e 3 gerações de imagem. Cada ajuste faz 1 chamada ao Claude e 1 imagem. O 3D imersivo é cobrado à parte pela World Labs. Estimativa pelos preços oficiais de outubro de 2026, ainda não medida em uso real: cerca de US$ 0,10 em imagens por projeto (US$ 0,034 por imagem no Nano Banana) e de US$ 0,50 a US$ 1,00 no Claude Opus 5.5; cerca de US$ 0,20 por ajuste. O Claude Sonnet 5.5 (`ANTHROPIC_MODEL=claude-sonnet-5-5`) custa a metade por uso.
 
 ## Modo demonstração
 
@@ -196,7 +200,7 @@ Resultados da última execução:
 | --- | --- |
 | `tsc --noEmit` | sem erros |
 | `expo lint` | sem avisos |
-| Jest | 18 suítes, 133 testes passando |
+| Jest | 20 suítes, 136 testes passando |
 | E2E web — demonstração | 11 etapas, 0 erros no console |
 | E2E web — IA (simulada) | 12 etapas, 0 erros no console; todas as requisições do app aceitas pelos schemas do servidor |
 | Rotas reais + SDK Anthropic (API simulada) | análise, 3 propostas, proposta avulsa e ajuste em streaming; imagem e 3D sem chave retornam "não configurado" (503) |
@@ -237,9 +241,9 @@ Passos que dependem de você:
 3. **Publicar o servidor** (obrigatório para usar IA no app publicado). Com o EAS Hosting:
    ```bash
    npx expo export -p web
-   npx eas-cli@latest deploy --prod
+   npx eas-cli@latest deploy --environment production --prod
    ```
-   Cadastre as chaves como variáveis secretas do EAS (por exemplo, `npx eas-cli@latest env:create --name ANTHROPIC_API_KEY --value ... --environment production --visibility secret`) e aponte o app para a URL publicada com `EXPO_PUBLIC_API_URL` (ou com o campo `origin` do plugin `expo-router` no `app.json`) antes da build. Também é possível hospedar em um servidor Node próprio, seguindo o guia de API Routes do Expo Router. A geração mantém a conexão aberta por 1 a 3 minutos; confira os limites de duração de requisição da hospedagem escolhida.
+   Cadastre as chaves no ambiente `production` do EAS com visibilidade **Sensitive**: o EAS Hosting não consegue usar variáveis do tipo Secret. Pelo site, siga o [guia](docs/configurar-apis.md); pela linha de comando, use `npx eas-cli@latest env:create --name ANTHROPIC_API_KEY --value ... --environment production --visibility sensitive`. Depois, aponte o app para a URL publicada com `EXPO_PUBLIC_API_URL` (ou com o campo `origin` do plugin `expo-router` no `app.json`) antes da build. Também é possível hospedar em um servidor Node próprio, seguindo o guia de API Routes do Expo Router. A geração mantém a conexão aberta por 1 a 3 minutos; confira os limites de duração de requisição da hospedagem escolhida.
 4. **Builds e envio:**
    ```bash
    npx eas-cli@latest build --profile preview --platform android   # APK para testar
