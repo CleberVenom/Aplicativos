@@ -58,6 +58,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "b6d36a27-f6d9-4c11-b17c-6105b2347a6f"
+      }
+    },
+    "owner": "clebervenom"
   }
 }
