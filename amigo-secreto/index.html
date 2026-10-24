@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amigo Secreto</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #b3202a; color: #222; margin: 0; padding: 16px; }
+    main { max-width: 480px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 24px; }
+    h1 { margin-top: 0; text-align: center; }
+    form { display: flex; gap: 8px; }
+    input { flex: 1; min-width: 0; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+    button { padding: 10px 16px; font-size: 1rem; border: 0; border-radius: 8px; background: #1f7a3a; color: #fff; cursor: pointer; }
+    button:disabled { opacity: .5; cursor: default; }
+    button.secundario { background: #777; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
+    li button { background: none; color: #b3202a; padding: 4px 8px; }
+    .erro { color: #b3202a; min-height: 1.2em; }
+    .dica { color: #777; font-size: .9rem; }
+    #nomes { display: grid; gap: 8px; margin-bottom: 16px; }
+    #nomes button.visto { background: #777; }
+    #revelacao { text-align: center; padding: 16px; border: 2px dashed #b3202a; border-radius: 12px; margin-bottom: 16px; }
+    .aviso { font-weight: bold; font-size: 1.1rem; }
+    .amigo { font-size: 2rem; font-weight: bold; color: #b3202a; margin: 8px 0 16px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🎁 Amigo Secreto</h1>
+
+    <section id="cadastro">
+      <form id="form">
+        <input id="campo" placeholder="Nome do participante" autocomplete="off" required>
+        <button>Adicionar</button>
+      </form>
+      <p class="erro" id="erro"></p>
+      <ul id="lista"></ul>
+      <button id="sortear" disabled>Sortear</button>
+      <p class="dica" id="dica">Adicione pelo menos 3 participantes.</p>
+    </section>
+
+    <section id="resultado" hidden>
+      <p>Cada participante clica no próprio nome para ver quem tirou.</p>
+      <div id="nomes"></div>
+      <div id="revelacao" hidden>
+        <p class="dica">Sorteio de <strong id="quem"></strong></p>
+        <p class="aviso">Preste bem atenção, não vá confundir o amigo desta vez em</p>
+        <p class="amigo" id="amigo"></p>
+        <button id="ocultar">Ocultar</button>
+      </div>
+      <button class="secundario" id="novo">Novo sorteio</button>
+    </section>
+  </main>
+
+  <script>
+    const participantes = [];
+    let pares = new Map();
+
+    const form = document.getElementById('form');
+    const campo = document.getElementById('campo');
+    const erro = document.getElementById('erro');
+    const lista = document.getElementById('lista');
+    const sortear = document.getElementById('sortear');
+    const dica = document.getElementById('dica');
+    const cadastro = document.getElementById('cadastro');
+    const resultado = document.getElementById('resultado');
+    const nomes = document.getElementById('nomes');
+    const revelacao = document.getElementById('revelacao');
+    const quem = document.getElementById('quem');
+    const amigo = document.getElementById('amigo');
+
+    function renderLista() {
+      lista.innerHTML = '';
+      participantes.forEach((nome, i) => {
+        const li = document.createElement('li');
+        const texto = document.createElement('span');
+        texto.textContent = nome;
+        const remover = document.createElement('button');
+        remover.textContent = 'Remover';
+        remover.onclick = () => {
+          participantes.splice(i, 1);
+          renderLista();
+        };
+        li.append(texto, remover);
+        lista.append(li);
+      });
+      sortear.disabled = participantes.length < 3;
+      dica.hidden = participantes.length >= 3;
+    }
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const nome = campo.value.trim();
+      if (!nome) return;
+      if (participantes.some(p => p.toLowerCase() === nome.toLowerCase())) {
+        erro.textContent = 'Esse nome já foi adicionado.';
+        return;
+      }
+      erro.textContent = '';
+      participantes.push(nome);
+      campo.value = '';
+      campo.focus();
+      renderLista();
+    };
+
+    // Embaralha e liga cada pessoa à próxima da roda: ninguém tira a si mesmo.
+    sortear.onclick = () => {
+      const ordem = [...participantes];
+      for (let i = ordem.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ordem[i], ordem[j]] = [ordem[j], ordem[i]];
+      }
+      pares = new Map(ordem.map((nome, i) => [nome, ordem[(i + 1) % ordem.length]]));
+
+      nomes.innerHTML = '';
+      participantes.forEach(nome => {
+        const botao = document.createElement('button');
+        botao.textContent = nome;
+        botao.onclick = () => {
+          botao.classList.add('visto');
+          quem.textContent = nome;
+          amigo.textContent = pares.get(nome);
+          nomes.hidden = true;
+          revelacao.hidden = false;
+        };
+        nomes.append(botao);
+      });
+
+      cadastro.hidden = true;
+      resultado.hidden = false;
+      nomes.hidden = false;
+      revelacao.hidden = true;
+    };
+
+    document.getElementById('ocultar').onclick = () => {
+      amigo.textContent = '';
+      revelacao.hidden = true;
+      nomes.hidden = false;
+    };
+
+    document.getElementById('novo').onclick = () => {
+      pares = new Map();
+      resultado.hidden = true;
+      cadastro.hidden = false;
+    };
+  </script>
+</body>
+</html>
