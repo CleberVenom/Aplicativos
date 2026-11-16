@@ -3,19 +3,22 @@
 > Fonte única de verdade para ChatGPT e Claude continuarem o trabalho. Atualizar a cada etapa.
 
 **Última atualização:** 16/11/2026 — Claude (arquiteto)
-**Fase atual:** FASE 0 — Emergencial GTA VI · **Etapa:** 0.1 Levantamento de informações
+**Fase atual:** FASE 0 — Emergencial GTA VI · **Etapa:** 0.2 Aprovação do modelo "cortes autorizados"
 
-## Decisões tomadas
-- Provar pipeline mínimo antes de construir a fábrica (ver PLANO_MESTRE.md §1).
-- Fase 0 sem material de terceiros não autorizado.
-- TikTok: upload manual na Fase 0. YouTube: upload privado via API + publicação no Studio.
+## Respostas do proprietário (16/11/2026)
+- Formato: **cortes** de vídeos/lives de canais em alta. Não vai jogar.
+- Computador: **Windows**. Orçamento inicial: **até R$ 300**.
+- **Sem n8n** por enquanto: Claude e GPT conduzem a automação.
+- Assinaturas: **ChatGPT Pro** e **Claude Pro** (sem contas de API pagas).
+- Nome sugerido: **Cortes City Radar BR**.
 
-## Decisões pendentes (perguntas ao proprietário)
-1. Sistema operacional e hardware; haverá gameplay próprio?
-2. Orçamento mensal.
-3. Contas/assinaturas já existentes.
-4. Preferência de implantação (n8n Cloud + GitHub Actions recomendado).
-5. Nomes dos canais: manter "Vice City" ou nomes neutros.
+## Decisões propostas (aguardando aprovação)
+- Somente cortes de criadores com **autorização registrada** (pública ou por escrito); arquivo de origem obtido de forma permitida.
+- Cada corte com valor próprio: contexto, legenda, título/gancho, recorte editorial.
+- Execução local no Windows: **Claude Code** (incluso no Claude Pro) + Python + FFmpeg + faster-whisper + auto-editor.
+- ChatGPT Pro: revisão de títulos/roteiros e auditoria, comunicando-se com o Claude por **arquivos do projeto** (repositório/pasta compartilhada), não diretamente.
+- Começar só em **PT-BR**; EN/ES depois que o ciclo funcionar.
+- Publicação: upload manual no YouTube Studio e TikTok na Fase 0 (sem custo, sem auditoria de API).
 
 ## Fatos verificados
 | Fato | Fonte | Verificado em |
@@ -26,7 +29,7 @@
 ## Integrações
 | Integração | Status |
 |-----------|--------|
-| n8n Cloud | Não criado |
+| n8n Cloud | Adiado por decisão do proprietário |
 | MCP n8n ↔ Claude | Falhou ao conectar nesta sessão (404) — refazer após criar instância |
 | OpenAI API | Não configurado |
 | Anthropic API | Não configurado |
@@ -34,4 +37,4 @@
 | TikTok | Não configurado |
 
 ## Próxima etapa
-Receber respostas às 5 perguntas → resumir decisões → mostrar fluxo → aguardar aprovação → Etapa 0.2 (criação de contas).
+Proprietário aprova o modelo e indica criadores → Claude pesquisa a política de cortes de cada um → Etapa 0.3: instalar Claude Code + ferramentas no Windows.
