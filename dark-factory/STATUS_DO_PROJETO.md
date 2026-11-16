@@ -3,7 +3,7 @@
 > Fonte única de verdade para ChatGPT e Claude continuarem o trabalho. Atualizar a cada etapa.
 
 **Última atualização:** 16/11/2026 — Claude (arquiteto)
-**Fase atual:** FASE 0 — Emergencial GTA VI · **Etapa:** 0.2 Aprovação do modelo "cortes autorizados"
+**Fase atual:** FASE 0 — Emergencial GTA VI · **Etapa:** 0.3 Seleção de criadores e pedidos de autorização
 
 ## Respostas do proprietário (16/11/2026)
 - Formato: **cortes** de vídeos/lives de canais em alta. Não vai jogar.
@@ -12,8 +12,8 @@
 - Assinaturas: **ChatGPT Pro** e **Claude Pro** (sem contas de API pagas).
 - Nome sugerido: **Cortes City Radar BR**.
 
-## Decisões propostas (aguardando aprovação)
-- Somente cortes de criadores com **autorização registrada** (pública ou por escrito); arquivo de origem obtido de forma permitida.
+## Decisões
+- ✅ APROVADO (16/11): somente cortes de criadores com **autorização registrada** (pública ou por escrito); arquivo de origem obtido de forma permitida.
 - Cada corte com valor próprio: contexto, legenda, título/gancho, recorte editorial.
 - Execução local no Windows: **Claude Code** (incluso no Claude Pro) + Python + FFmpeg + faster-whisper + auto-editor.
 - ChatGPT Pro: revisão de títulos/roteiros e auditoria, comunicando-se com o Claude por **arquivos do projeto** (repositório/pasta compartilhada), não diretamente.
@@ -37,4 +37,6 @@
 | TikTok | Não configurado |
 
 ## Próxima etapa
-Proprietário aprova o modelo e indica criadores → Claude pesquisa a política de cortes de cada um → Etapa 0.3: instalar Claude Code + ferramentas no Windows.
+1. Ver CRIADORES.md: top de GTA já tem cortes próprios → buscar streamers BR médios que vão transmitir GTA VI.
+2. Proprietário envia pedidos de autorização (modelo em CRIADORES.md §4).
+3. Em paralelo: instalar Claude Code + ferramentas no Windows e criar o canal.
