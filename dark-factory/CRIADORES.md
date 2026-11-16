@@ -22,9 +22,29 @@
 **Leitura:** os maiores já têm estrutura própria de cortes. Para um canal novo, eles são
 **prioridade baixa de contato** e alta de referência (observar o que viraliza).
 
-## 3. Próxima pesquisa (a fazer)
+## 3. Candidatos BR para contato (ordem sugerida)
 
-- Lista de 10–15 streamers BR **médios** que transmitirão GTA VI no lançamento (Twitch/Kick/YouTube), com seguidores, média de espectadores e contato comercial público.
+> Tamanho/audiência atual **não verificado** — conferir no Streams Charts ou na página do canal antes de enviar.
+> Contato: usar **somente** o e-mail comercial público (YouTube → canal → "Mais sobre este canal" → "Ver endereço de e-mail"; ou bio da Twitch/Kick). Nunca DM insistente.
+
+| Prioridade | Criador | Por que | Fonte |
+|-----------|---------|---------|-------|
+| A | Rato Borrachudo | GTA RP; lançou servidor Nitro Race (corridas) | Folha Vitória |
+| A | Drezzy | Co-fundador do Nitro Race | Folha Vitória |
+| A | Skorpion Gamer | Co-fundador do Nitro Race | Folha Vitória |
+| A | Luquet4 | Conhecido por GTA RP e narrativas de personagem | Remessa Online |
+| A | SanInPlay | Vai transmitir GTA VI no lançamento | Portal Viciados (16/11/2026) |
+| A | Cross | Vai transmitir GTA VI no lançamento | Portal Viciados (16/11/2026) |
+| B | DavyJones | Vai transmitir GTA VI no lançamento | Portal Viciados (16/11/2026) |
+| B | Bartz, Zago | Aparecem em conteúdo de GTA RP com Coringa/Paulinho | Vídeo "Coringa reage" (YouTube) |
+| C | Alanzoka | Muito grande; plano de jogar antes via região Nova Zelândia gerou polêmica → **risco**: aguardar posição da Rockstar/Twitch antes de cortar esse material | Portal Viciados |
+| C | Paulinho o LOKO, LOUD Coringa | Maiores de GTA BR; já possuem cortes próprios/associados | Streams Charts |
+
+**Atenção:** lançamento libera à meia-noite local de cada país (19/11 no Brasil). Material gravado via troca de região
+não é vazamento, mas é zona cinzenta — o Auditor de direitos (AG07) marca como `PENDENTE` até haver clareza.
+
+## 3.1 Pesquisa futura
+- Medir audiência atual de cada candidato e completar a lista até 15 nomes.
 - Campanhas pagas de cortes de GTA VI (plataformas de "clipping"). Existe pelo menos uma aberta (musical, TikTok/Instagram, US$ 0,70/mil views) — **não serve para cortes de streamers**; reavaliar campanhas de streamers BR.
 
 ## 4. Modelo de pedido de autorização (enviar pelo e-mail comercial público do criador)
@@ -51,6 +71,10 @@ Guardar a resposta (print ou PDF do e-mail) na pasta `autorizacoes/` e preencher
 | CRI-001 | — | — | — | — | — | — | — | — |
 
 ## Fontes
+- [Portal Viciados — criadores BR e fuso da Nova Zelândia (16/11/2026)](https://viciados.net/alanzoka-criadores-brasileiros-horario-brasil-gta-6/)
+- [Folha Vitória — Nitro Race](https://www.folhavitoria.com.br/games/rato-borrachudo-anuncia-nitro-race-servidor-de-gta-com-foco-em-corridas/)
+- [Remessa Online — streamers mais ricos](https://www.remessaonline.com.br/blog/streamers-mais-ricos-do-brasil/)
+- [Streams Charts — GTA 6 streamers 2026](https://streamscharts.com/news/gta-6-streamers-top-gta-creators-2026)
 - [Streams Charts — Top GTA streamers 2025](https://streamscharts.com/news/top-gta-streamers-2025)
 - [Canal "cortes paulinho o loko [oficial]"](https://www.youtube.com/channel/UCosQ7mChs8yBAAe8z12jrZw), [Modder Clips](https://www.youtube.com/@ModderClips/streams), [Anonimo CLIPS](https://www.youtube.com/channel/UC9lNZFEptmb-bXgYWmZwe5Q) — autodeclarações, não comprovam autorização
 - [Content Rewards — GTA 6 clipping (12/11/2026)](https://contentrewards.com/articles/gta-6-clipping)

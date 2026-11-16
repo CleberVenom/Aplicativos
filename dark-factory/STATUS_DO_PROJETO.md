@@ -37,6 +37,7 @@
 | TikTok | Não configurado |
 
 ## Próxima etapa
-1. Ver CRIADORES.md: top de GTA já tem cortes próprios → buscar streamers BR médios que vão transmitir GTA VI.
-2. Proprietário envia pedidos de autorização (modelo em CRIADORES.md §4).
-3. Em paralelo: instalar Claude Code + ferramentas no Windows e criar o canal.
+1. Proprietário: INSTALACAO_WINDOWS.md (Etapa 1 — Claude Code) → reportar resultado do Passo 6.
+2. Proprietário: CANAL_YOUTUBE.md → criar canal Cortes City Radar (sem publicar).
+3. Proprietário: conferir e-mails comerciais dos candidatos A em CRIADORES.md §3 → enviar pedidos (modelo §4).
+4. Claude: Etapa 2 — pedido único para o Claude Code local instalar Python, FFmpeg, faster-whisper, auto-editor.
